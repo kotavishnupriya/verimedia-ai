@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VeriMedia AI | Multimodal News Authenticator</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="index.css?v=11"/>
+    <script src="index.js?v=11" defer></script>
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="brand">
+            <img alt="VeriMedia AI Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARiDt1VJcWBdCOkHNW8ve2yLw4Tli8mdZa013erbmYCwvLCJIGFXsIQEDO9P7kupL50Bp7txak6Ttznot_YCRvnohrRyLJp_blHh_30jHywZB-ybDJNvPemJRCoaHnzDYhvdJ-5FFVhaKyvUdLIXv2mtZUwLJmrsqVfZtTYWxioiq2QHnHLd4XDnJ8oGRB52LzRzdUpQc2DGPp1zEhNeQSU3qeJ8MkqIrk5q21S5M3z0ZJyYpO3TBGZgGrOU11rHDFQGmurCtnIz-f"/>
+            <div style="display: flex; flex-direction: column;">
+                <span class="brand-title">VeriMedia AI</span>
+                <span class="text-xs text-on-surface-variant font-mono" style="opacity: 0.7;">Multimodal Authenticator</span>
+            </div>
+        </div>
+        
+        <button class="btn-new-analysis">
+            <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+            New Analysis
+        </button>
+        
+        <nav class="nav-menu">
+            <a class="nav-item active" href="#" data-type="video">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videocam</span>
+                Video Analysis
+            </a>
+            <a class="nav-item" href="#" data-type="article">
+                <span class="material-symbols-outlined">newspaper</span>
+                Article &amp; Image
+            </a>
+            <a class="nav-item" href="#" data-type="social">
+                <span class="material-symbols-outlined">share</span>
+                Social Media
+            </a>
+            <a class="nav-item" href="#" data-type="history">
+                <span class="material-symbols-outlined">history</span>
+                History
+            </a>
+        </nav>
+        
+        <div class="nav-bottom">
+            <a class="nav-item" href="#" data-type="settings">
+                <span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+            <a class="nav-item" href="#" data-type="docs">
+                <span class="material-symbols-outlined">menu_book</span>
+                Documentation
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Shell -->
+    <main class="main-content">
+        <!-- Top Navigation Bar -->
+        <header class="header">
+            <div style="display: flex; align-items: center; gap: 32px;">
+                <nav class="header-nav">
+                    <a class="header-nav-item active" href="#">Dashboard</a>
+                    <a class="header-nav-item" href="#">Workspaces</a>
+                    <a class="header-nav-item" href="#">Archive</a>
+                </nav>
+                
+                <div class="search-box">
+                    <span class="material-symbols-outlined icon" style="font-size: 20px;">search</span>
+                    <input placeholder="Global evidence search..." type="text"/>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <div class="live-node">
+                    <span class="dot"></span>
+                    <span class="text-xs uppercase font-bold tracking-wider" style="opacity: 0.7; font-size: 10px;">Live Node: HK-01</span>
+                </div>
+                
+                <button class="material-symbols-outlined icon-btn">notifications</button>
+                <button class="material-symbols-outlined icon-btn">help_outline</button>
+                
+                <div class="avatar">
+                    <img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3eO8RXlpKbpxs6bjd8nh0ptSE-BY0UDUessOxX2nh5vBSeFrRLSNyJ6kw2QaC-FXpPAVH1GGi3D2gVwMcTeVys8K6IZPWiJ6EZrk8KTow7s_4NZgu_G4pqY4dj9vijI889Rjlwv0IlALYMrEezk6SfL4ehfufZ6ElOYZemeruOqsunCrswjYF8DvPhAebq1sAnc_BK9R6aoOHGk_NOcP-4mH7W54LDA29BKgSFyDl7idKAXFpXQK_yT4VzR6tBTORUCxbFNudZxl4"/>
+                </div>
+                
+                <button class="btn-verify">Verify Now</button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Canvas -->
+        <div class="dashboard" id="main-dashboard">
+            <!-- Left: Input & Upload Panel (40%) -->
+            <section class="panel-left custom-scrollbar">
+                <div>
+                    <h1 class="page-title">VeriMedia AI: Multimodal News Authenticator</h1>
+                    <p class="text-on-surface-variant" style="opacity: 0.8;">Cross-referencing Computer Vision, NLP, and Acoustic Analysis.</p>
+                </div>
+                
+                <form id="verify-form" class="glass-panel" style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- Tabs -->
+                    <div class="tabs" id="analysis-tabs">
+                        <button type="button" class="tab active" data-type="video">Video Analysis</button>
+                        <button type="button" class="tab" data-type="article">Article &amp; Image</button>
+                        <button type="button" class="tab" data-type="social">Social Media URL</button>
+                    </div>
+                    
+                    <input type="hidden" name="tabType" id="tabType" value="video" />
+                    
+                    <!-- Drop Zone -->
+                    <label for="media-upload" class="dropzone" id="dropzone-area">
+                        <input type="file" id="media-upload" name="media" style="display: none;" accept="video/*,image/*" />
+                        <div class="dropzone-icon">
+                            <span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px;" id="upload-icon">cloud_upload</span>
+                        </div>
+                        <div style="text-align: center;">
+                            <p class="font-bold" id="upload-text">Drag &amp; drop news clip or image here</p>
+                            <p class="text-xs text-on-surface-variant" style="opacity: 0.6; margin-top: 4px;">or <span class="text-primary" style="text-decoration: underline;">browse files</span></p>
+                        </div>
+                        <div class="dropzone-limits">
+                            <span class="text-xs font-mono uppercase tracking-wider" style="font-size: 10px;" id="upload-limits">Limit: 250MB | MP4, MKV, JPG, PNG</span>
+                        </div>
+                    </label>
+                    
+                    <!-- URL Input Area -->
+                    <div id="url-area" style="display: none; margin-bottom: 24px;">
+                        <input type="url" name="socialUrl" id="social-url" placeholder="Paste social media URL here..." style="width: 100%; padding: 16px; border-radius: 8px; background-color: var(--surface-container-low); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--on-surface); font-size: 14px;" />
+                    </div>
+                    
+                    <!-- Optional Headline Area -->
+                    <div>
+                        <button type="button" class="headline-toggle" id="headline-toggle-btn">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">add_circle</span>
+                            <span class="text-xs">Optional: Paste Accompanying Headline</span>
+                        </button>
+                        <textarea name="headline" class="headline-area custom-scrollbar" id="headline-area" placeholder="Paste the text or headline that accompanied this media for linguistic verification..." rows="3"></textarea>
+                    </div>
+                    
+                    <!-- Verification CTA -->
+                    <button type="submit" class="btn-primary-large" id="btn-submit">
+                        <span class="material-symbols-outlined" id="submit-icon">search</span>
+                        <span id="submit-text">Run Multimodal Verification</span>
+                    </button>
+                </form>
+                
+                <div class="glass-panel tip-panel">
+                    <span class="material-symbols-outlined text-amber">info</span>
+                    <p class="text-xs" style="line-height: 1.6;">
+                        <span class="font-bold">Pro Tip:</span> Using "Cross-Modal Fusion" allows the AI to detect temporal inconsistencies between audio lip-sync and visual frame rates.
+                        <span class="material-symbols-outlined" style="font-size: 14px; cursor: help; vertical-align: middle;" title="Cross-Modal Fusion: The integration of features from different data types (visual, textual, acoustic) into a single representation.">help_outline</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Right: Results & Analytics Dashboard (60%) -->
+            <section class="panel-right custom-scrollbar">
+                <!-- Overall Verdict Card -->
+                <div class="glass-panel verdict-card" id="results-panel" style="display: none; flex-direction: column; opacity: 0; transition: opacity 0.5s ease;">
+                    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                        <div class="verdict-bg-glow"></div>
+                        
+                        <div class="verdict-content">
+                            <div class="alert-badge" id="verdict-badge">
+                                <span class="material-symbols-outlined" style="font-size: 18px;" id="verdict-icon">report_problem</span>
+                                <span class="text-xs font-bold uppercase tracking-wider" style="font-size: 10px;" id="verdict-text">ANALYZING...</span>
+                            </div>
+                            <h2 class="font-bold" style="font-size: 32px; line-height: 1.2;">Aggregate Fraud Index</h2>
+                            <p class="text-on-surface-variant" style="max-width: 320px;" id="verdict-description">
+                                Analyzing content for signs of manipulation...
+                            </p>
+                        </div>
+                        
+                        <!-- Gauge Component -->
+                        <div class="gauge-container">
+                            <svg class="gauge-svg">
+                                <circle class="gauge-bg" cx="96" cy="96" fill="transparent" r="90" stroke="currentColor" stroke-width="8"></circle>
+                                <circle class="gauge-ring" id="fraud-gauge" cx="96" cy="96" fill="transparent" r="90" stroke="#ffb4ab" stroke-linecap="round" stroke-width="12"></circle>
+                            </svg>
+                            <div class="gauge-text">
+                                <span class="gauge-value" id="fraud-index-val">0%</span>
+                                <span class="font-mono uppercase tracking-widest text-on-surface-variant" style="font-size: 10px; opacity: 0.8;">FAKE / MANIPULATED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modality Breakdown Grid -->
+                <div class="modality-grid" id="modality-panel" style="display: none;">
+                    <div class="glass-panel modality-card">
+                        <div class="modality-header">
+                            <span class="material-symbols-outlined text-error">spellcheck</span>
+                            <span class="font-mono font-bold modality-tag" style="font-size: 10px;">NLP</span>
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <p class="text-xs text-on-surface-variant font-medium">Textual Authenticity</p>
+                            <p class="text-xl font-bold" id="nlp-val">0% Fake</p>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="nlp-progress" style="width: 0%; transition: width 1s ease;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-panel modality-card">
+                        <div class="modality-header">
+                            <span class="material-symbols-outlined text-error">visibility</span>
+                            <span class="font-mono font-bold modality-tag" style="font-size: 10px;">CV</span>
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <p class="text-xs text-on-surface-variant font-medium">Computer Vision</p>
+                            <p class="text-xl font-bold" id="cv-val">0% Fake</p>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="cv-progress" style="width: 0%; transition: width 1s ease;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-panel modality-card">
+                        <div class="modality-header">
+                            <span class="material-symbols-outlined text-error">hub</span>
+                            <span class="font-mono font-bold modality-tag" style="font-size: 10px;">X-MODAL</span>
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <p class="text-xs text-on-surface-variant font-medium">Cross-Modal Logic</p>
+                            <p class="text-xl font-bold" id="xmodal-val">0% Mismatch</p>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="xmodal-progress" style="width: 0%; transition: width 1s ease;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Diagnostic Report -->
+                <div class="glass-panel diagnostic-report" id="diagnostic-panel" style="display: none;">
+                    <div class="diagnostic-header">
+                        <div class="diagnostic-title">
+                            <span class="material-symbols-outlined text-primary">analytics</span>
+                            <h3 class="font-bold">AI Diagnostic Report</h3>
+                        </div>
+                        <button class="diagnostic-download text-xs font-bold">
+                            Download JSON Evidence <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                        </button>
+                    </div>
+                    
+                    <div class="diagnostic-list custom-scrollbar" id="diagnostic-list">
+                        <!-- Diagnostic items will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="glass-panel" id="empty-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; color: var(--on-surface-variant);">
+                    <span class="material-symbols-outlined" style="font-size: 64px; opacity: 0.2; margin-bottom: 16px;">query_stats</span>
+                    <h2 class="font-bold" style="font-size: 24px; color: var(--on-surface);">Awaiting Analysis</h2>
+                    <p style="max-width: 300px; margin-top: 8px;">Upload a media file and run verification to view the diagnostic breakdown here.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- History Dashboard Canvas -->
+        <div class="dashboard history-dashboard custom-scrollbar" id="history-dashboard" style="display: none;">
+            <div style="margin-bottom: 24px;">
+                <h1 class="page-title">Analysis History</h1>
+                <p class="text-on-surface-variant" style="opacity: 0.8;">Review past verifications and AI diagnostic reports.</p>
+            </div>
+            
+            <div id="history-list-container" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- History cards injected here -->
+            </div>
+        </div>
+
+        <!-- Settings Dashboard Canvas -->
+        <div class="dashboard settings-dashboard custom-scrollbar" id="settings-dashboard" style="display: none; flex-direction: column;">
+            <div style="margin-bottom: 24px;">
+                <h1 class="page-title">Settings</h1>
+                <p class="text-on-surface-variant" style="opacity: 0.8;">Manage your API configuration and application data.</p>
+            </div>
+            
+            <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; max-width: 600px;">
+                <div>
+                    <h3 class="font-bold" style="margin-bottom: 8px;">API Configuration</h3>
+                    <p class="text-xs text-on-surface-variant" style="margin-bottom: 16px;">Set your OpenAI or OpenRouter API key. This is saved securely to your local environment.</p>
+                    <input type="password" id="setting-api-key" placeholder="sk-..." class="form-input" style="width: 100%;">
+                </div>
+                
+                <div>
+                    <h3 class="font-bold" style="margin-bottom: 8px;">Analysis Strictness (Temperature)</h3>
+                    <p class="text-xs text-on-surface-variant" style="margin-bottom: 16px;">Lower values (e.g. 0.1) make the AI more strict and deterministic. Higher values make it more creative.</p>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <input type="range" id="setting-temp" min="0" max="1" step="0.1" value="0.3" style="flex: 1; cursor: pointer;">
+                        <span id="setting-temp-val" class="font-mono font-bold" style="width: 30px; text-align: right;">0.3</span>
+                    </div>
+                </div>
+                
+                <button id="btn-save-settings" class="btn-verify" style="align-self: flex-start; margin-top: 8px;">Save Settings</button>
+            </div>
+
+            <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; max-width: 600px; margin-top: 24px; border-color: rgba(255, 82, 82, 0.2);">
+                <div>
+                    <h3 class="font-bold text-error" style="margin-bottom: 8px;">Danger Zone</h3>
+                    <p class="text-xs text-on-surface-variant" style="margin-bottom: 16px;">Permanently delete all of your past analysis history. This action cannot be undone.</p>
+                    <button id="btn-clear-history" class="btn-verify" style="background-color: rgba(255, 82, 82, 0.1); color: var(--error); border: 1px solid rgba(255, 82, 82, 0.3);">Clear History</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentation Dashboard Canvas -->
+        <div class="dashboard docs-dashboard custom-scrollbar" id="docs-dashboard" style="display: none; flex-direction: column;">
+            <div style="margin-bottom: 24px;">
+                <h1 class="page-title">Documentation</h1>
+                <p class="text-on-surface-variant" style="opacity: 0.8;">Understanding VeriMedia AI and interpreting your results.</p>
+            </div>
+            
+            <div class="docs-content glass-panel" style="overflow-y: auto;">
+                <h2>Getting Started</h2>
+                <p>VeriMedia AI is a multimodal tool designed to help you verify the authenticity of news and media on the internet.</p>
+                <ul>
+                    <li><strong>Video Analysis:</strong> Upload a short clip or screenshot of a video to check for deepfake markers.</li>
+                    <li><strong>Article & Image:</strong> Paste a news headline or upload an article screenshot to evaluate journalistic integrity and visual manipulation.</li>
+                    <li><strong>Social Media:</strong> (Coming Soon) Paste a social URL to check for bot amplification.</li>
+                </ul>
+
+                <h2>Understanding the AI Verdict</h2>
+                <p>After running an analysis, the system will output a <strong>Fraud Index (0-100%)</strong> and a verdict:</p>
+                <ul>
+                    <li><span class="text-primary font-bold">AUTHENTIC (0-15%)</span>: The content exhibits high journalistic standards and no signs of manipulation.</li>
+                    <li><span class="text-primary font-bold">LOW RISK (16-30%)</span>: Minor sensationalism or minor clickbait, but fundamentally factual.</li>
+                    <li><span class="text-amber font-bold">MEDIUM RISK (31-60%)</span>: Highly biased, misleading framing, or unverified claims. Approach with caution.</li>
+                    <li><span class="text-error font-bold">HIGH RISK (61-100%)</span>: Clear signs of fabrication, AI generation, deepfakes, or known conspiracy patterns.</li>
+                </ul>
+
+                <h2>Modality Scores Explained</h2>
+                <p>The system breaks down its analysis into three independent pillars to ensure accuracy:</p>
+                
+                <h3>1. NLP (Textual Authenticity)</h3>
+                <p>Analyzes the headline and any visible text for sensationalism, logical fallacies, and AI-generation patterns (e.g., uniform sentence structure common in LLMs).</p>
+
+                <h3>2. CV (Computer Vision)</h3>
+                <p>When an image is provided, the Vision AI scans for artifacting, inconsistent lighting, and unnatural blending which are hallmarks of manipulated media or AI generation.</p>
+
+                <h3>3. Cross-Modal Logic</h3>
+                <p>Checks for consistency between the text and the image. For example, if a headline claims "City on fire!" but the image shows a peaceful street, this score will flag a high mismatch.</p>
+
+                <h2>Privacy & Security</h2>
+                <p>Your API keys are stored strictly in your local <code>.env</code> file. Any media you upload is processed entirely locally and immediately deleted from the <code>uploads/</code> directory the moment the analysis completes. We do not store your files.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Background Decoration -->
+    <div class="bg-decor">
+        <div class="decor-circle-1"></div>
+        <div class="decor-circle-2"></div>
+    </div>
+</body>
+</html>
