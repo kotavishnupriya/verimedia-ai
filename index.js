@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(verifyForm);
 
             try {
-                const response = await fetch('http://localhost:3000/api/verify', {
+                const response = await fetch('/api/verify', {
                     method: 'POST',
                     body: formData
                 });
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (historyListContainer) {
                     historyListContainer.innerHTML = '<p class="text-on-surface-variant">Loading history...</p>';
                 }
-                const response = await fetch('http://localhost:3000/api/history');
+                const response = await fetch('/api/history');
                 const data = await response.json();
                 
                 if (historyListContainer) {
@@ -471,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Fetch current settings
             try {
-                const res = await fetch('http://localhost:3000/api/settings');
+                const res = await fetch('/api/settings');
                 const data = await res.json();
                 
                 if (data.status === 'success') {
@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     temperature: tempSlider ? tempSlider.value : undefined
                 };
                 
-                const res = await fetch('http://localhost:3000/api/settings', {
+                const res = await fetch('/api/settings', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearHistoryBtn.textContent = 'Clearing...';
                 
                 try {
-                    const res = await fetch('http://localhost:3000/api/history', { method: 'DELETE' });
+                    const res = await fetch('/api/history', { method: 'DELETE' });
                     const data = await res.json();
                     
                     if (data.status === 'success') {
